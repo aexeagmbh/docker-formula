@@ -2,13 +2,6 @@ docker-python-apt:
   pkg.installed:
     - name: python-apt
 
-docker-dependencies:
-   pkg.installed:
-    - pkgs:
-      - iptables
-      - ca-certificates
-      - lxc
-
 docker_repo:
     pkgrepo.managed:
       - repo: 'deb http://get.docker.io/ubuntu docker main'
@@ -16,8 +9,6 @@ docker_repo:
       - key_url: salt://docker/docker.pgp
       - require_in:
           - pkg: lxc-docker
-      - require:
-        - pkg: docker-python-apt
 
 lxc-docker:
   pkg.latest:
