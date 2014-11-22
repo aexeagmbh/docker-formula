@@ -3,8 +3,7 @@ docker-python-apt:
     - name: python-apt
 
 docker-py:
-  pip:
-    - installed:
+  pip.installed
 
 docker_repo:
     pkgrepo.managed:
