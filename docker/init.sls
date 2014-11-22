@@ -2,6 +2,10 @@ docker-python-apt:
   pkg.installed:
     - name: python-apt
 
+docker-py:
+  pip:
+    - installed:
+
 docker_repo:
     pkgrepo.managed:
       - repo: 'deb http://get.docker.io/ubuntu docker main'
