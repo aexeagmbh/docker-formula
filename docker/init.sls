@@ -1,6 +1,10 @@
-docker-python-apt:
+docker-pkg-deps:
   pkg.installed:
-    - name: python-apt
+    - pkgs:
+      - linux-image-extra-virtual
+      - python-apt
+    - require_in:
+      - pkg: lxc-docker
 
 docker-py:
   pip.installed
