@@ -6,6 +6,12 @@ docker-pkg-deps:
     - require_in:
       - pkg: lxc-docker
 
+reboot-after-kernel-update:
+  module.wait:
+    - name: system.reboot
+    - watch:
+      - pkg: docker-pkg-deps
+
 docker-py:
   pip.installed
 
