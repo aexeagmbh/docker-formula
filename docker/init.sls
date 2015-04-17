@@ -24,7 +24,7 @@ docker_repo:
           - pkg: lxc-docker
 
 lxc-docker:
-  pkg.latest:
+  pkg.installed:
     - require_in:
       - service: docker
 
