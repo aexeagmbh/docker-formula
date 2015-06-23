@@ -15,18 +15,35 @@ reboot-after-kernel-update:
 docker-py:
   pip.installed
 
-docker_repo:
+docker-repo:
     pkgrepo.managed:
       - repo: 'deb http://get.docker.io/ubuntu docker main'
       - file: '/etc/apt/sources.list.d/docker.list'
       - key_url: salt://docker/docker.pgp
-      - require_in:
-          - pkg: lxc-docker
 
+{% if salt['pillar.get']('docker-version') %}
 lxc-docker:
-  pkg.installed:
-    - require_in:
+  pkg.removed:
+    - watch_in:
       - service: docker
+    - require:
+      - pkgrepo: docker-repo
+
+lxc-docker-{{ pillar['docker-version'] }}:
+  pkg.installed:
+    - watch_in:
+      - service: docker
+    - require:
+      - pkgrepo: docker-repo
+      - pkg: lxc-docker
+{% else %}
+lxc-docker-{{ pillar['docker-version'] }}:
+  pkg.installed:
+    - watch_in:
+      - service: docker
+    - require:
+      - pkgrepo: docker-repo
+{% endif %}
 
 docker:
   service.running

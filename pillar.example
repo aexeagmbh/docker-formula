@@ -1,0 +1,2 @@
+# pin the docker version. If not set will install latest
+docker-version: 1.6.2
