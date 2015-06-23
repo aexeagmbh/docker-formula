@@ -22,22 +22,23 @@ docker-repo:
       - key_url: salt://docker/docker.pgp
 
 {% if salt['pillar.get']('docker-version') %}
-lxc-docker:
+lxc-docker-uninstalled:
   pkg.removed:
     - watch_in:
       - service: docker
     - require:
       - pkgrepo: docker-repo
 
-lxc-docker-{{ pillar['docker-version'] }}:
+lxc-docker:
   pkg.installed:
+    - name: lxc-docker-{{ pillar['docker-version'] }}
     - watch_in:
       - service: docker
     - require:
       - pkgrepo: docker-repo
-      - pkg: lxc-docker
+      - pkg: lxc-docker-uninstalled
 {% else %}
-lxc-docker-{{ pillar['docker-version'] }}:
+lxc-docker:
   pkg.installed:
     - watch_in:
       - service: docker
