@@ -12,8 +12,9 @@ reboot-after-kernel-update:
     - watch:
       - pkg: docker-pkg-deps
 
-docker-py:
-  pip.installed
+docker-py==1.2.3:
+  pip.installed:
+    - upgrade: True
 
 docker-repo:
     pkgrepo.managed:
