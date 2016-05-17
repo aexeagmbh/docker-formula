@@ -12,7 +12,7 @@ reboot-after-kernel-update:
     - watch:
       - pkg: docker-pkg-deps
 
-docker-py==1.2.3:
+docker-py==1.8.1:
   pip.installed:
     - upgrade: True
 
